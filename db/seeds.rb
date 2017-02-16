@@ -5,3 +5,44 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+Customer.destroy_all
+Category.destroy_all
+Product.destroy_all
+Order.destroy_all
+Ordering.destroy_all
+
+Customer.create!(first_name: "John", last_name: "Raze")
+Customer.create!(first_name: "Victor", last_name: "Lin")
+
+Category.create!(name: "Bouquets")
+Category.create!(name: "Fruits")
+
+Product.create!(name: "Brooch Bouquet", category_id: 1)
+Product.create!(name: "Paper Flower Bouquet", category_id: 1)
+Product.create!(name: "Apple", category_id: 2)
+Product.create!(name: "Banana", category_id: 2)
+Product.create!(name: "Grapes", category_id: 2)
+
+Order.create!(customer_id: 1)
+Order.create!(customer_id: 2)
+
+Ordering.create!(order_id: 1, product_id: 1, number_purchased: 15)
+Ordering.create!(order_id: 2, product_id: 2, number_purchased: 1)
+Ordering.create!(order_id: 2, product_id: 3, number_purchased: 3)
+Ordering.create!(order_id: 2, product_id: 4, number_purchased: 4)
+Ordering.create!(order_id: 2, product_id: 4, number_purchased: 4)
+Ordering.create!(order_id: 2, product_id: 5, number_purchased: 5)
+
+=begin
+select customers.id as customer_id,
+ customers.first_name as customer_first_name,
+ categories.id as category_id,
+ categories.name as category_name,
+ orderings.number_purchased
+ from customers
+ join orders on customers.id = orders.customer_id
+ join orderings on orders.id = orderings.order_id
+ join products on orderings.product_id = products.id
+ join categories on products.category_id = categories.id
+ where customers.first_name = 'John';
+=end
