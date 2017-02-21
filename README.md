@@ -37,6 +37,12 @@ select customers.id as customer_id,
  join category_products on products.id = category_products.product_id
  join categories on category_products.category_id = categories.id
  where customer_id = 1;
+
+ Output:
+ customer_id | customer_first_name | category_id | category_name | number_purchased
+-------------+---------------------+-------------+---------------+------------------
+          1 | John                |           1 | Bouquets      |               15
+
 ```
 
 ## Schema
