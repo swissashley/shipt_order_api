@@ -16,8 +16,8 @@ rails s
 ```
 Then open:
 
-[API call for Customer Order] http://localhost:3000/api/customers/1/orders [api1]
-[API call for specific time interval] http://localhost:3000/api/products/products/?start_date=01-01-2017&end_date=02-23-2017&interval=day [api2]
+[API call for Customer Order][api1]
+[API call for specific time interval][api2]
 
 [api1]: http://localhost:3000/api/customers/1/orders
 [api2]: http://localhost:3000/api/products/products/?start_date=01-01-2017&end_date=02-23-2017&interval=day
