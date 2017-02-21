@@ -6,6 +6,15 @@ class Product < ApplicationRecord
   has_many :categories, through: :category_products
   has_many :orderings
   has_many :orders, through: :orderings
+
+  def self.orders_in_range(params)
+      @products = Order.orders_in_range(params)
+        .joins(:orderings, :products)
+        .select("products.id product_id, products.name product_name, sum(orderings.number_purchased) sold, orders.updated_at updated_at")
+        .group("products.id, orders.updated_at")
+      @products
+	end
+
   private
 
   def in_stock?
