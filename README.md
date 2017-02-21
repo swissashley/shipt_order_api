@@ -118,12 +118,12 @@ it won't be appropriate to put the extra info into the same table.
 ## Additional Questions 2: Inventory Distribution
 
 I can think of 2 ways to handle the distribution issue:
-1. When a customer adds a product into his/her order, we temporary remove the number
+- When a customer adds a product into his/her order, we temporary remove the number
 of purchased from the inventory so that other customer won't be able to purchase
 the same item when it's out-of-stock. However this could cause a lot of database
 transactions to update the inventory, if the first customer decide not to purchase
 the item, we have to add the inventory back.
-2. Update the inventory at check out. We only check if the product is still in stock
+- Update the inventory at check out. We only check if the product is still in stock
  at this moment. We can handle the error message and send it back to the client side
  so that a customer can remove the product from the order and won't cause too many
  database updates.
