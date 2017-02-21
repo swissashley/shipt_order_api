@@ -8,6 +8,7 @@
 Customer.destroy_all
 Category.destroy_all
 Product.destroy_all
+CategoryProduct.destroy_all
 Order.destroy_all
 Ordering.destroy_all
 
@@ -17,21 +18,28 @@ Customer.create!(first_name: "Victor", last_name: "Lin")
 Category.create!(name: "Bouquets")
 Category.create!(name: "Fruits")
 
-Product.create!(name: "Brooch Bouquet", category_id: 1)
-Product.create!(name: "Paper Flower Bouquet", category_id: 1)
-Product.create!(name: "Apple", category_id: 2)
-Product.create!(name: "Banana", category_id: 2)
-Product.create!(name: "Grapes", category_id: 2)
+Product.create!(name: "Brooch Bouquet", quantity: 30)
+Product.create!(name: "Paper Flower Bouquet", quantity: 30)
+Product.create!(name: "Apple", quantity: 30)
+Product.create!(name: "Banana", quantity: 30)
+Product.create!(name: "Grapes", quantity: 30)
+
+CategoryProduct.create!(category_id: 1, product_id: 1)
+CategoryProduct.create!(category_id: 1, product_id: 2)
+CategoryProduct.create!(category_id: 2, product_id: 3)
+CategoryProduct.create!(category_id: 2, product_id: 4)
+CategoryProduct.create!(category_id: 2, product_id: 5)
 
 Order.create!(customer_id: 1)
+Order.create!(customer_id: 2)
 Order.create!(customer_id: 2)
 
 Ordering.create!(order_id: 1, product_id: 1, number_purchased: 15)
 Ordering.create!(order_id: 2, product_id: 2, number_purchased: 1)
-Ordering.create!(order_id: 2, product_id: 3, number_purchased: 3)
-Ordering.create!(order_id: 2, product_id: 4, number_purchased: 4)
-Ordering.create!(order_id: 2, product_id: 4, number_purchased: 4)
-Ordering.create!(order_id: 2, product_id: 5, number_purchased: 5)
+Ordering.create!(order_id: 2, product_id: 3, number_purchased: 2)
+Ordering.create!(order_id: 3, product_id: 1, number_purchased: 3)
+Ordering.create!(order_id: 3, product_id: 4, number_purchased: 3)
+Ordering.create!(order_id: 3, product_id: 5, number_purchased: 3)
 
 =begin
 select customers.id as customer_id,

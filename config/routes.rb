@@ -1,3 +1,12 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
+  namespace :api, defaults: {format: :json} do
+    resources :customers, only: [:show] do
+      get :orders, on: :member
+    end
+    resources :products, only: [:index] do
+			get :products, on: :collection
+		end
+  end
+
 end

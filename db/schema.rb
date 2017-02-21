@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170216213801) do
+ActiveRecord::Schema.define(version: 20170217012646) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,6 +19,17 @@ ActiveRecord::Schema.define(version: 20170216213801) do
     t.string   "name",       null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_categories_on_name", unique: true, using: :btree
+  end
+
+  create_table "category_products", force: :cascade do |t|
+    t.integer  "category_id", null: false
+    t.integer  "product_id",  null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["category_id", "product_id"], name: "index_category_products_on_category_id_and_product_id", unique: true, using: :btree
+    t.index ["category_id"], name: "index_category_products_on_category_id", using: :btree
+    t.index ["product_id"], name: "index_category_products_on_product_id", using: :btree
   end
 
   create_table "customers", force: :cascade do |t|
@@ -34,6 +45,9 @@ ActiveRecord::Schema.define(version: 20170216213801) do
     t.integer  "number_purchased", null: false
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
+    t.index ["order_id", "product_id"], name: "index_orderings_on_order_id_and_product_id", unique: true, using: :btree
+    t.index ["order_id"], name: "index_orderings_on_order_id", using: :btree
+    t.index ["product_id"], name: "index_orderings_on_product_id", using: :btree
   end
 
   create_table "orders", force: :cascade do |t|
@@ -41,13 +55,15 @@ ActiveRecord::Schema.define(version: 20170216213801) do
     t.string   "status",      default: "Waiting for delivery"
     t.datetime "created_at",                                   null: false
     t.datetime "updated_at",                                   null: false
+    t.index ["customer_id"], name: "index_orders_on_customer_id", using: :btree
   end
 
   create_table "products", force: :cascade do |t|
-    t.string   "name",        null: false
-    t.integer  "category_id", null: false
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.string   "name",                   null: false
+    t.integer  "quantity",   default: 0
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.index ["name"], name: "index_products_on_name", unique: true, using: :btree
   end
 
 end

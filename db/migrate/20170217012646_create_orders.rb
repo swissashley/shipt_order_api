@@ -5,5 +5,6 @@ class CreateOrders < ActiveRecord::Migration[5.0]
       t.string :status, default: "Waiting for delivery"
       t.timestamps
     end
+    add_index :orders, :customer_id
   end
 end
